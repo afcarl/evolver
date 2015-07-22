@@ -16,6 +16,7 @@ python Random_Search.py
 python Hill-Climbing_with_Random_Restarts.py
 python Simulated_Annealing.py
 python Mu_Lambda_Evolution_Strategy.py
+python Genetic_Algorithm.py
 echo ""
 echo "************************************************************************"
 echo "          RANDOM GENERATION OF VECTORS AND THEIR CONVOLUTION            "

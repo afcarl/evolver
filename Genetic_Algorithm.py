@@ -4,10 +4,10 @@ import math
 
 X_MIN = -0.20 # minimum x allowed
 X_MAX = 1.120 # maximum x allowed
-N_POPULATION = 20 # desired population size
+N_POPULATION = 10 # desired population size
 P_MUTATION = 0.1 # probability of mutation
-P_CROSSOVER = 0.3 # probability of crossover
-CHROMOSOME_SIZE = 4 # define the length of binary string
+P_CROSSOVER = 0.1 # probability of crossover
+CHROMOSOME_SIZE = 8 # define the length of binary string
 
 # function f(x) ****TEST FUNCTION HERE****
 def f(chromosome):
@@ -26,7 +26,7 @@ def initial_population(n_population):
 
 # loop stops when the condition is not met
 def loop_condition_is_met(bestGene, timeCounter):
-    timeLimit = 10
+    timeLimit = 1000
     idealSolution = 15.91
     precision = 0.001
     return abs(idealSolution - f(bestGene)) > precision and\
@@ -89,11 +89,11 @@ def uniform_crossover(adam, eve):
 # Genetic Algorithm main function
 def genetic_algorithm():
     population = initial_population(N_POPULATION)
-    bestGene = "XXXX" # initially best is nobody
+    bestGene = "XXXXXXXX" # initially best is nobody
     timeCounter = 0
     while loop_condition_is_met(bestGene, timeCounter):
         for chromosome in population:
-            if bestGene == "XXXX" or f(chromosome) > f(bestGene):
+            if bestGene == "XXXXXXXX" or f(chromosome) > f(bestGene):
                 bestGene = chromosome
         children = []
         for index in range(N_POPULATION/2):
@@ -103,6 +103,8 @@ def genetic_algorithm():
             children.append(child_2)
         population = children
         timeCounter += 1
+    # print result
+    print "Genetic Algorithm: " + str((bestGene, round(f(bestGene), 3)))
 
 # execute
 genetic_algorithm()
