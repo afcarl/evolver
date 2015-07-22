@@ -27,7 +27,7 @@ def initial_population(n_population):
 
 # loop stops when the condition is not met
 def loop_condition_is_met(bestGene, timeCounter):
-    timeLimit = 10
+    timeLimit = 1000
     idealSolution = 15.91
     precision = 0.001
     return abs(idealSolution - f(bestGene)) > precision and\
