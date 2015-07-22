@@ -90,8 +90,7 @@ def mu_lambda_evoulution_strategy():
             # assess fitness
             fitness.append(f(chromosome))
             # determine the best gene
-            if bestGene == "XXXX" or\
-             f(chromosome) > f(bestGene):
+            if bestGene == "XXXX" or f(chromosome) > f(bestGene):
                 bestGene = chromosome
         # the MU individuals in P whose fitness are greatest
         survivors = []

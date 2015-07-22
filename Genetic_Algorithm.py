@@ -61,13 +61,48 @@ def mutated(chromosome):
             mutatedChromosome += chromosome[index]
     return mutatedChromosome
 
+# randomly select two parents from a population
+def random_selection(population):
+    adam = random.choice(population)
+    population.remove(adam)
+    eve = random.choice(population)
+    population.remove(eve)
+    return adam, eve
+
+# uniform crossover that return two children
+def uniform_crossover(adam, eve):
+    child_1 = "" # first child - adam side
+    child_2 = "" # second child - eve side
+    for index in range(CHROMOSOME_SIZE):
+        chance = random.uniform(0.0, 1.0)
+        # if there is a crossover, add exchanged bit to each child
+        if chance < P_CROSSOVER:
+            child_1 += eve[index]
+            child_2 += adam[index]
+        # otherwise, add the promised bit to each child
+        else:
+            child_1 += adam[index]
+            child_2 += eve[index]
+    return child_1, child_2
+
+
 # Genetic Algorithm main function
 def genetic_algorithm():
     population = initial_population(N_POPULATION)
     bestGene = "XXXX" # initially best is nobody
-    
-
-
+    timeCounter = 0
+    while loop_condition_is_met(bestGene, timeCounter):
+        for chromosome in population:
+            if bestGene == "XXXX" or f(chromosome) > f(bestGene):
+                bestGene = chromosome
+        children = []
+        for index in range(N_POPULATION/2):
+            adam, eve = random_selection(population)
+            child_1, child_2 = uniform_crossover(adam, eve)
+            children.append(child_1)
+            children.append(child_2)
+        population = children
+        timeCounter += 1
 
 # execute
 genetic_algorithm()
