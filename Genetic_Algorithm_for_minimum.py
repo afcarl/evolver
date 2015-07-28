@@ -93,7 +93,7 @@ def genetic_algorithm():
     timeCounter = 0
     while loop_condition_is_met(bestGene, timeCounter):
         for chromosome in population:
-            if bestGene == "XXXXXXXX" or f(chromosome) > f(bestGene):
+            if bestGene == "XXXXXXXX" or f(chromosome) < f(bestGene):
                 bestGene = chromosome
         children = []
         for index in range(N_POPULATION/2):
