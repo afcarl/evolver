@@ -85,7 +85,6 @@ def uniform_crossover(adam, eve):
             child_2 += eve[index]
     return child_1, child_2
 
-
 # Genetic Algorithm main function
 def genetic_algorithm():
     population = initial_population(N_POPULATION)
@@ -105,6 +104,8 @@ def genetic_algorithm():
         timeCounter += 1
     # print result
     print "Genetic Algorithm: " + str((bestGene, round(f(bestGene), 3)))
+    # return result
+    return (bestGene, round(f(bestGene), 3))
 
 # execute
 genetic_algorithm()

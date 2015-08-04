@@ -14,9 +14,13 @@ def f(x):
 def loop_condition_is_met(bestSolution, timeCounter, temperature):
     idealSolution = -6.02
     precision = 0.0001
-    timeLimit = 1000000
+    timeLimit = 10000
     return abs(idealSolution - f(bestSolution)) > precision and\
             timeCounter < timeLimit and temperature > 0
+
+# check if the given solution is in the provided range
+def in_range(solution):
+    return solution >= X_MIN and solution <= X_MAX
 
 # randomly tweak the solution
 def randomly_tweaked(solution):
@@ -32,8 +36,9 @@ def simulated_annealing():
     while loop_condition_is_met(bestSolution, timeCounter, temperature):
         randomSolution = randomly_tweaked(solution)
         p = random.uniform(0.0, 1.0)
-        if f(randomSolution) > f(solution) or\
-            p < math.e**((f(randomSolution)-f(solution))/temperature):
+        if (f(randomSolution) < f(solution) or\
+            p < math.e**((f(randomSolution)-f(solution))/temperature)) and\
+            in_range(randomSolution):
             solution = randomSolution
         temperature -= 0.01
         if f(solution) < f(bestSolution):
@@ -42,6 +47,8 @@ def simulated_annealing():
     # print the best solution
     print "Simulated Annealing: " +\
             str((round(bestSolution, 3), round(f(bestSolution), 3)))
+    # return the best result
+    return (round(bestSolution, 3), round(f(bestSolution), 3))
 
 # execute
 simulated_annealing()

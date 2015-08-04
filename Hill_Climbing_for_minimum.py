@@ -12,7 +12,7 @@ def f(x):
 
 # hill climbing loop stops when this condition is not met
 def loop_condition_is_met(timeCounter, solution):
-    timeLimit = 1000
+    timeLimit = 10000
     idealSolution = -6.02
     precision = 0.0001
     return timeCounter < timeLimit and\
@@ -22,6 +22,10 @@ def randomly_tweaked(solution):
     tweakRange = 0.001
     return solution + random.uniform(-tweakRange, tweakRange)
 
+# check if the given solution is in the provided range
+def in_range(solution):
+    return solution >= X_MIN and solution <= X_MAX
+
 # Hill-Climbing main function
 def hill_climbing():
     solution = random.uniform(X_MIN, X_MAX) # some initial candidate solution
@@ -29,12 +33,14 @@ def hill_climbing():
     # repeat until S is the ideal solution or we have run out of time
     while loop_condition_is_met(timeCounter, solution):
         randomSolution = randomly_tweaked(solution)
-        if f(randomSolution) < f(solution):
+        if f(randomSolution) < f(solution) and in_range(randomSolution):
             solution = randomSolution
         # increment timeCounter
         timeCounter += 1
     # print the "global" solution
     print "Hill-Climbing: " + str((round(solution, 3), round(f(solution), 3)))
+    # return the solution
+    return (round(solution, 3), round(f(solution), 3))
 
 # execute
 hill_climbing()

@@ -32,8 +32,10 @@ def gradient_descent():
 	while loop_condition_is_met(x_old, x_new, precision):
 		x_old = x_new
 		x_new = x_old - alpha * f_prime(x_old)
-	# print the local maximum
+	# print the local minimum
 	print "Gradient Descent: " + str((round(x_new, 3), round(f(x_new), 3)))
+	# return the local minimum
+	return (round(x_new, 3), round(f(x_new), 3))
 
 # execute
 gradient_descent()
