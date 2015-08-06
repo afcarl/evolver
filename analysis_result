@@ -1,0 +1,24 @@
+**** Average Performance ****
+f(x) = (6x - 2)^2 * sin(12x - 4)
+gDe: -49.15555
+hCl: -45.9934
+sAn: -12.53875
+mLa: -177.994
+gAl: -177.994
+
+**** Average Performance ****
+f(x) = -2x^3 * sin(x^5 + 4)
+gDe: -2.8357
+hCl: -4.75285
+sAn: -1.69125
+mLa: -15.597
+gAl: -15.597
+
+**** Average Performance ****
+f(x) = 3x^3 * cos(3x^3 + 3)
+gDe: -6.1214
+hCl: -5.54255
+sAn: -6.2241
+mLa: -21.795
+gAl: -21.5809
+

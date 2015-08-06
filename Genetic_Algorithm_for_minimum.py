@@ -16,6 +16,8 @@ def f(t_num, chromosome):
         return (6*x-2)**2 * math.sin(12*x-4)
     elif t_num == 1:
         return -2*(x**3) * math.sin(x**5+4)
+    elif t_num == 2:
+        return 3*(x**3) * math.cos(3*(x**3)+3)
 
 # generate initial population
 def initial_population(n_population):

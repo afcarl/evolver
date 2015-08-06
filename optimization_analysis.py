@@ -1,5 +1,3 @@
-# import built-in
-import os
 # import algorithm implementation
 from Gradient_Descent import gradient_descent
 from Hill_Climbing_for_minimum import hill_climbing
@@ -11,14 +9,16 @@ from Genetic_Algorithm_for_minimum import genetic_algorithm
 N_TRIAL = 20
 F1 = 0      # f(x) = (6x - 2)^2 * sin(12x - 4)
 F2 = 1      # f(x) = -2x^3 * sin(x^5 + 4)
-F3 = 2      #
+F3 = 2      # f(x) = 3x^3 * cos(3x^3 + 3)
 
 # print test function
 def print_test_function(test_number):
     if test_number == 0:
-        print "f(x) = (6x - 2)^2 * sin(12x - 4)"
+        return "f(x) = (6x - 2)^2 * sin(12x - 4)\n"
     elif test_number == 1:
-        print "f(x) = -2x^3 * sin(x^5 + 4)"
+        return "f(x) = -2x^3 * sin(x^5 + 4)\n"
+    elif test_number == 2:
+        return "f(x) = 3x^3 * cos(3x^3 + 3)\n"
 
 # print average performance
 def printAveragePerformance(test_number):
@@ -53,14 +53,15 @@ def printAveragePerformance(test_number):
     genetic_algorithm_average /= N_TRIAL
 
     # print average performance
-    os.system("clear")
-    print "**** Average Performance ****"
-    print_test_function(test_number)
-    print "Ideal solution: -6.02"
-    print "gDe: " + str(gradient_descent_average)
-    print "hCl: " + str(hill_climbing_average)
-    print "sAn: " + str(simulated_annealing_average)
-    print "mLa: " + str(mu_lambda_evoulution_strategy_average)
-    print "gAl: " + str(genetic_algorithm_average)
+    return "**** Average Performance ****\n" +\
+            print_test_function(test_number) +\
+            "gDe: " + str(gradient_descent_average) + "\n" +\
+            "hCl: " + str(hill_climbing_average) + "\n" +\
+            "sAn: " + str(simulated_annealing_average) + "\n" +\
+            "mLa: " + str(mu_lambda_evoulution_strategy_average) + "\n" +\
+            "gAl: " + str(genetic_algorithm_average) + "\n\n"
 
-printAveragePerformance(0)
+result_file = open("analysis_result", "w")
+result_file.write(printAveragePerformance(0))
+result_file.write(printAveragePerformance(1))
+result_file.write(printAveragePerformance(2))
