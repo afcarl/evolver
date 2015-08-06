@@ -2,17 +2,20 @@
 import random
 import math
 
-X_MIN = -0.20 # minimum x allowed
-X_MAX = 1.120 # maximum x allowed
+X_MIN = -2.0 # minimum x allowed
+X_MAX = 2.0 # maximum x allowed
 N_POPULATION = 10 # desired population size
 P_MUTATION = 0.1 # probability of mutation
 P_CROSSOVER = 0.1 # probability of crossover
 CHROMOSOME_SIZE = 8 # define the length of binary string
 
 # function f(x) ****TEST FUNCTION HERE****
-def f(chromosome):
+def f(t_num, chromosome):
     x = inContext(X_MIN, X_MAX, toDecimal(chromosome))
-    return (6*x-2)**2 * math.sin(12*x-4)
+    if t_num == 0:
+        return (6*x-2)**2 * math.sin(12*x-4)
+    elif t_num == 1:
+        return -2*(x**3) * math.sin(x**5+4)
 
 # generate initial population
 def initial_population(n_population):
@@ -25,12 +28,9 @@ def initial_population(n_population):
     return population
 
 # loop stops when the condition is not met
-def loop_condition_is_met(bestGene, timeCounter):
+def loop_condition_is_met(t, timeCounter):
     timeLimit = 1000
-    idealSolution = -6.02
-    precision = 0.001
-    return abs(idealSolution - f(bestGene)) > precision and\
-            timeCounter < timeLimit
+    return timeCounter < timeLimit
 
 # convert the binary into decimal
 def toDecimal(binaryString):
@@ -86,13 +86,13 @@ def uniform_crossover(adam, eve):
     return child_1, child_2
 
 # Genetic Algorithm main function
-def genetic_algorithm():
+def genetic_algorithm(t=0):
     population = initial_population(N_POPULATION)
     bestGene = "XXXXXXXX" # initially best is nobody
     timeCounter = 0
-    while loop_condition_is_met(bestGene, timeCounter):
+    while loop_condition_is_met(t, timeCounter):
         for chromosome in population:
-            if bestGene == "XXXXXXXX" or f(chromosome) < f(bestGene):
+            if bestGene == "XXXXXXXX" or f(t,chromosome) < f(t,bestGene):
                 bestGene = chromosome
         children = []
         for index in range(N_POPULATION/2):
@@ -103,9 +103,9 @@ def genetic_algorithm():
         population = children
         timeCounter += 1
     # print result
-    print "Genetic Algorithm: " + str((bestGene, round(f(bestGene), 3)))
+    print "Genetic Algorithm: " + str((bestGene, round(f(t,bestGene), 3)))
     # return result
-    return (bestGene, round(f(bestGene), 3))
+    return (bestGene, round(f(t,bestGene), 3))
 
 # execute
-genetic_algorithm()
+genetic_algorithm(0)

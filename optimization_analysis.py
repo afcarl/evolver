@@ -7,6 +7,10 @@ from Genetic_Algorithm_for_minimum import genetic_algorithm
 
 # constants
 N_TRIAL = 20
+F1 = 0      # f(x) = (6x - 2)^2 * sin(12x - 4)
+F2 = 1      # f(x) = -2x^3 * sin(x^5 + 4)
+
+
 
 # average performance
 gradient_descent_average = 0.0
@@ -41,6 +45,8 @@ genetic_algorithm_average /= N_TRIAL
 # print average performance
 def printAveragePerformance():
     print "**** Average Performance ****"
+    print "f(x) = (6x - 2)^2 * sin(12x - 4)"
+    print "Ideal solution: -6.02"
     print "gDe: " + str(gradient_descent_average)
     print "hCl: " + str(hill_climbing_average)
     print "sAn: " + str(simulated_annealing_average)
