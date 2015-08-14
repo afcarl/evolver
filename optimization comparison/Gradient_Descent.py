@@ -8,7 +8,7 @@ X_MAX = 2.0 				# maximum x allowed
 VERY_SMALL_VALUE = 0.0001 	# hypothetical small value
 
 # function f(v) ****TEST FUNCTIONS HERE****
-# *parameter v is vector of independent variables
+# *parameter v is independent variables vector
 def f(t_num, v):
     if t_num == 0:
         x = v[0]

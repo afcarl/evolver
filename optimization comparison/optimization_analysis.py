@@ -1,24 +1,32 @@
 # import algorithm implementation
 from Gradient_Descent import gradient_descent
-from Hill_Climbing_for_minimum import hill_climbing
-from Simulated_Annealing_for_minimum import simulated_annealing
-from Mu_Lambda_Evolution_Strategy_for_minimum import mu_lambda_evoulution_strategy
-from Genetic_Algorithm_for_minimum import genetic_algorithm
+from Hill_Climbing import hill_climbing
+from Simulated_Annealing import simulated_annealing
+from Mu_Lambda_Evolution_Strategy import mu_lambda_evoulution_strategy
+from Genetic_Algorithm import genetic_algorithm
+
+# TEST FUNCTIONS
+# 1) One variable function: 2*sin(6x-2) * (6x-2)^2, 0<=x<=1
+# 2) Branin function:
+# 3) Rosenbrock (-5<= x_i <= 5)
+# 4) Goldstein-Price (-2<= x_i <= 2).
 
 # constants
 N_TRIAL = 20
-F1 = 0      # f(x) = (6x - 2)^2 * sin(12x - 4)
-F2 = 1      # f(x) = -2x^3 * sin(x^5 + 4)
-F3 = 2      # f(x) = 3x^3 * cos(3x^3 + 3)
+F1 = 0  # f(x)=(6x-2)^2*sin(12x-4)
+F2 = 1  # f(x)=(x2-(5.1/4pi^2)x1^2+5x1/pi-6)^2+10(1-1/8pi)cos(x1)+10
+
 
 # print test function
 def print_test_function(test_number):
     if test_number == 0:
-        return "f(x) = (6x - 2)^2 * sin(12x - 4)\n"
+        return "f(x)=(6x-2)^2*sin(12x-4)\n"
     elif test_number == 1:
-        return "f(x) = -2x^3 * sin(x^5 + 4)\n"
+        return "f(x)=(x2-(5.1/4pi^2)x1^2+5x1/pi-6)^2+10(1-1/8pi)cos(x1)+10\n"
     elif test_number == 2:
-        return "f(x) = 3x^3 * cos(3x^3 + 3)\n"
+        return ""
+    elif test_number == 3:
+        return ""
 
 # print average performance
 def printAveragePerformance(test_number, n_var):
