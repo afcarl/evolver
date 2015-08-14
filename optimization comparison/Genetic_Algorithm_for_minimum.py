@@ -4,7 +4,8 @@ import math
 
 X_MIN = -2.0 # minimum x allowed
 X_MAX = 2.0 # maximum x allowed
-N_POPULATION = 100 # desired population size
+N_POPULATION = 20 # desired population size
+N_GENERATION = 1000 # desired number of generation
 P_MUTATION = 0.1 # probability of mutation
 P_CROSSOVER = 0.1 # probability of crossover
 S_TOURNAMENT = 10 # desired tournament size
@@ -31,16 +32,11 @@ def initial_population(n_population):
     return population
 
 # generaet initial chromosome based on number of variables
-def initial_chromosome(n_val):
+def initial_chromosome(n_var):
     chromosome = ""
-    for index in range(CHROMOSOME_SIZE * n_val):
+    for index in range(CHROMOSOME_SIZE * n_var):
         chromosome += "X"
     return chromosome
-
-# loop stops when the condition is not met
-def loop_condition_is_met(t, timeCounter):
-    timeLimit = 1000
-    return timeCounter < timeLimit
 
 # convert the binary into decimal
 def toDecimal(binaryString):
@@ -72,13 +68,12 @@ def mutated(chromosome):
     return mutatedChromosome
 
 # select a chromosome through a tournament
-def tournament_selection(t=0, population):
+def tournament_selection(t, population):
     bestGene = random.choice(population)
     # since bestGene is already assigned, start with index 1
-    index = 1
-    while index < S_TOURNAMENT:
+    for index in range(1, S_TOURNAMENT):
         nextGene = random.choice(population)
-        if f(t, nextGene) < f(t, bestgene):
+        if f(t, nextGene) < f(t, bestGene):
             bestGene = nextGene
     return bestGene
 
@@ -99,12 +94,11 @@ def uniform_crossover(adam, eve):
     return child_1, child_2
 
 # Genetic Algorithm main function
-def genetic_algorithm(t=0, n_val=1):
+def genetic_algorithm(t=0, n_var=1):
     population = initial_population(N_POPULATION)
-    bestGene = initial_chromosome(n_val)
-    timeCounter = 0
-    while loop_condition_is_met(t, timeCounter):
-        # COPY: tournament selection to select fitter chromosomes
+    bestGene = initial_chromosome(n_var)
+    generation = 0
+    while generation < N_GENERATION:
         for chromosome in population:
             # if the best gene is nobody or the new chromosome is more fit
             if bestGene[0] == "X" or f(t,chromosome) < f(t,bestGene):
@@ -119,11 +113,11 @@ def genetic_algorithm(t=0, n_val=1):
             children.append(mutated(child_2))
         population = children
         # increment time counter
-        timeCounter += 1
+        generation += 1
     # print result
     print "Genetic Algorithm: " + str((bestGene, round(f(t,bestGene), 3)))
     # return result
     return (bestGene, round(f(t,bestGene), 3))
 
 # execute
-genetic_algorithm(0)
+genetic_algorithm()

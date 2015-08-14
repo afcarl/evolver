@@ -7,13 +7,17 @@ X_MIN = -2.0 				# minimum x allowed
 X_MAX = 2.0 				# maximum x allowed
 VERY_SMALL_VALUE = 0.0001 	# hypothetical small value
 
-# function f(x) ****TEST FUNCTIONS HERE****
-def f(t_num, x):
+# function f(v) ****TEST FUNCTIONS HERE****
+# *parameter v is vector of independent variables
+def f(t_num, v):
     if t_num == 0:
+        x = v[0]
         return (6*x-2)**2 * math.sin(12*x-4)
     elif t_num == 1:
+        x = v[0]
         return -2*(x**3) * math.sin(x**5+4)
     elif t_num == 2:
+        x = v[0]
         return 3*(x**3) * math.cos(3*(x**3)+3)
 
 # calculate the slope of f(x) at x

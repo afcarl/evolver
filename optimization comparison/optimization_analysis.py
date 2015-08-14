@@ -21,7 +21,7 @@ def print_test_function(test_number):
         return "f(x) = 3x^3 * cos(3x^3 + 3)\n"
 
 # print average performance
-def printAveragePerformance(test_number):
+def printAveragePerformance(test_number, n_var):
     # average performance
     gradient_descent_average = 0.0
     hill_climbing_average = 0.0
@@ -35,8 +35,9 @@ def printAveragePerformance(test_number):
         gd_x, gd_y = gradient_descent(test_number)
         hc_x, hc_y = hill_climbing(test_number)
         sa_x, sa_y = simulated_annealing(test_number)
-        ml_x, ml_y = mu_lambda_evoulution_strategy(test_number)
-        ga_x, ga_y = genetic_algorithm(test_number)
+        ml_x, ml_y = mu_lambda_evoulution_strategy(test_number, n_var)
+        ga_x, ga_y = genetic_algorithm(test_number, n_var)
+        print "\n"
 
         # sum up the performance result for each algorithm
         gradient_descent_average += gd_y
@@ -61,7 +62,9 @@ def printAveragePerformance(test_number):
             "mLa: " + str(mu_lambda_evoulution_strategy_average) + "\n" +\
             "gAl: " + str(genetic_algorithm_average) + "\n\n"
 
+print "Writing file to \"analysis_result\"..."
 result_file = open("analysis_result", "w")
-result_file.write(printAveragePerformance(0))
-result_file.write(printAveragePerformance(1))
-result_file.write(printAveragePerformance(2))
+result_file.write(printAveragePerformance(0, 1))
+result_file.write(printAveragePerformance(1, 1))
+result_file.write(printAveragePerformance(2, 1))
+print "Writing file complete."
