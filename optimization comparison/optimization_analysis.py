@@ -15,6 +15,9 @@ from Genetic_Algorithm import genetic_algorithm
 N_TRIAL = 20
 F1 = 0  # f(x)=(6x-2)^2*sin(12x-4)
 F2 = 1  # f(x)=(x2-(5.1/4pi^2)x1^2+5x1/pi-6)^2+10(1-1/8pi)cos(x1)+10
+F3 = 2  # f(x)=(1-x1)^2+100(x2-x1^2)^2
+F4 = 3  # f(x)=(1+(x1+x2+1)^2*(19-14x1+3x1^2-14x2+6x1x2+3x2^2))
+        #      (30+(2x1-3x2)^2*(18-32x1+12x1^2+48x2-36x1x2+27x2^2))
 
 
 # print test function
@@ -24,9 +27,10 @@ def print_test_function(test_number):
     elif test_number == 1:
         return "f(x)=(x2-(5.1/4pi^2)x1^2+5x1/pi-6)^2+10(1-1/8pi)cos(x1)+10\n"
     elif test_number == 2:
-        return ""
+        return "f(x)=(1-x1)^2+100(x2-x1^2)^2\n"
     elif test_number == 3:
-        return ""
+        return "f(x)=(1+(x1+x2+1)^2*(19-14x1+3x1^2-14x2+6x1x2+3x2^2))\n" +\
+                    "(30+(2x1-3x2)^2*(18-32x1+12x1^2+48x2-36x1x2+27x2^2))\n"
 
 # print average performance
 def printAveragePerformance(test_number, n_var):

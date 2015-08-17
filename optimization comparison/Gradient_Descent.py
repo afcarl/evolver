@@ -11,18 +11,28 @@ VERY_SMALL_VALUE = 0.0001 	# hypothetical small value
 # *parameter v is independent variables vector
 def f(t_num, v):
     if t_num == 0:
-        x = v[0]
-        return (6*x-2)**2 * math.sin(12*x-4)
+        x1 = v[0]
+        return (6*x-2)**2*math.sin(12*x-4)
     elif t_num == 1:
-        x = v[0]
-        return -2*(x**3) * math.sin(x**5+4)
+        x1 = v[0]
+        x2 = v[1]
+        return (x2-(5.1/(4*math.pi**2))*(x1**2)+5*x1/math.pi-6)**2+\
+                10*(1-1/(8*math.pi))*math.cos(x1)+10
     elif t_num == 2:
-        x = v[0]
-        return 3*(x**3) * math.cos(3*(x**3)+3)
+        x1 = v[0]
+        x2 = v[1]
+        return 
 
 # calculate the slope of f(x) at x
 def f_prime(t,x):
 	return (f(t,x + VERY_SMALL_VALUE) - f(t,x)) / VERY_SMALL_VALUE
+
+# calculate derivative of vector v
+def f_prime(t, v):
+    v_prime = []
+    for component in v:
+        v_prime.append(f_prime(t, component))
+    return v_prime
 
 # stop the descent loop when this condition is not met
 def loop_condition_is_met(x_old, x_new, precision, timeCounter):
@@ -33,11 +43,14 @@ def loop_condition_is_met(x_old, x_new, precision, timeCounter):
 			timeCounter < timeLimit
 
 # Gradient Descent main function
-def gradient_descent(t=0):
+def gradient_descent(t=0, n_var=1):
 	alpha = 0.0001 							# step size
 	precision = 0.0001 						# desired precision
-	x_old = 0.0								# initialized x_old
-	x_new = random.uniform(X_MIN, X_MAX) 	# random initial vector
+	x_old = []								# initialized x_old vector
+    # generate a random vector
+	x_new = []
+    for index in range(n_var):
+        x_new.append(random.uniform(X_MIN, X_MAX))
 	timeCounter = 0							# time counter
 	# this process continues until the x reaches
 	# a local peak with a given precision
