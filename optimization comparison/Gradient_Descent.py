@@ -12,23 +12,31 @@ VERY_SMALL_VALUE = 0.0001 	# hypothetical small value
 def f(t_num, v):
     if t_num == 0:
         x1 = v[0]
-        return (6*x-2)**2*math.sin(12*x-4)
+        return (6 * x - 2)**2 * math.sin(12 * x - 4)
     elif t_num == 1:
         x1 = v[0]
         x2 = v[1]
-        return (x2-(5.1/(4*math.pi**2))*(x1**2)+5*x1/math.pi-6)**2+\
-                10*(1-1/(8*math.pi))*math.cos(x1)+10
+        return (x2 - (5.1 / (4 * math.pi**2)) *\
+                (x1**2) + 5 * x1 / math.pi - 6)**2 +\
+                10 * (1 - 1 / (8 * math.pi)) * math.cos(x1) + 10
     elif t_num == 2:
         x1 = v[0]
         x2 = v[1]
-        return 
+        return (1 - x1)**2 + 100 * (x2 - x1**2)**2
+    elif t_num == 3:
+        x1 = v[0]
+        x2 = v[1]
+        return (1 + (x1 + x2 + 1)**2 * (19 - 14 * x1 + 3 * x1**2 - 14 * x2 +\
+                6 * x1 * x2 + 3 * x2**2)) * (30 + (2 * x1 - 3 * x2)**2 *\
+                (18 - 32 * x1 + 12 * x1**2 + 48 * x2 - 36 * x1 * x2 +\
+                27 * x2**2))
 
 # calculate the slope of f(x) at x
-def f_prime(t,x):
+def f_prime(t, x):
 	return (f(t,x + VERY_SMALL_VALUE) - f(t,x)) / VERY_SMALL_VALUE
 
 # calculate derivative of vector v
-def f_prime(t, v):
+def f_prime_v(t, v):
     v_prime = []
     for component in v:
         v_prime.append(f_prime(t, component))
@@ -55,8 +63,9 @@ def gradient_descent(t=0, n_var=1):
 	# this process continues until the x reaches
 	# a local peak with a given precision
 	while loop_condition_is_met(x_old, x_new, precision, timeCounter):
-		x_old = x_new
-		x_new = x_old - alpha * f_prime(t,x_old)
+        x_old = x_new
+        for index in range(n_var):
+            x_new = x_old - alpha * f_prime_v(t,x_old)
 		timeCounter += 1
 	# print the local minimum
 	print "Gradient Descent: " + str((round(x_new, 3), round(f(t,x_new), 3)))
